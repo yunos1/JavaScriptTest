@@ -3,8 +3,49 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+	<style type="text/css">
+		.select{
+			width: 200px;
+			height: 50px;
+			margin: 0 auto;
+		}
+		#pic{
+			
+			
+		}
+	</style>
 </head>
 <body>
+	<div class="select">
+		<form action="" method="post">
+			<select id="game">
+				
+				<option value="img/pic.png">--请选择--</option>
+				<option value="img/pic1.png">微软电脑</option>
+				<option value="img/pic2.png">苹果电脑</option>
+				<option value="img/pic3.png">谷歌浏览器</option>
+				<option value="img/pic4.png">普通电话</option>
+			</select>
+		</form>
+		
+	</div>
+	<div>
+		<img src="img/pic.png"  id="pic" />
+	</div>
+	
+	<script type="text/javascript">
+		window.onload = function(){
+			function $(id) {return document.getElementById(id);}
+			
+			$("game").onchange = function(){
+				var index = $("game").selectedIndex;
+				$('pic').src = $('game').options[index].value;
+			}
+			
+			
+		}
+	</script>
+	
 	
 </body>
 </html>

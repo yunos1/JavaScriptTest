@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<form action="" method="post">
+			用户名：<input id="username" type="text" value="" /></br>
+			密 &nbsp; &nbsp;码：<input id="password" type="password" value="" /></br>
+			<input id="submit" type="submit" value="注册"/>
+			<input id="reset" type="reset" value="重置"/>
+		</form>
+		<script type="text/javascript">
+			window.onload = function(){
+				
+				
+				function $(id) {return document.getElementById(id);}
+				
+				$('submit').onclick = function(){
+					var username = $('username').value;
+					var password = $('password').value;
+					if(username == '' || password == ''){
+						alert("用户名和密码不能为空");
+						return false;
+					}else if(username.length <8 ||username.length >20 || password.length <8 || password.length >20){
+						alert("用户名和密码的长度应该处于8到20位之间（包括）");
+						return false;
+					}else{
+						alert("用户名为"+username+"密码为"+password);
+						return false;
+					}
+				}
+				$('reset').onclick = function(){
+					//alert('清空数据');
+					var msg=confirm('确定清楚？');
+					if(msg){
+						return true;
+					}else{
+						return false;
+					}
+				}
+			}
+		</script>
+	</body>
+</html>

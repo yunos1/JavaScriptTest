@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="text" name="" id="target" value="" />
+		<input type="text" name="" id="source" value="资源文件" />
+		<input type="button" name="" id="bt" value="复制" />
+		
+		<script type="text/javascript">
+			function $(id){
+				return document.getElementById(id);
+			}
+			$('bt').onclick = function(){
+				$('target').value = $('source').value;
+			}
+		</script>
+	</body>
+</html>

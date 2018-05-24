@@ -1,0 +1,214 @@
+.header{
+	width:100%;
+	height: 62px;
+	
+	
+	border-bottom: 1px solid grey;
+}
+.logo{
+	margin-top: 20px;
+	margin-left: 110px;
+	display: inline-block;
+	width: 178px;
+	height:38px;
+	background: url(../img/logo.jpg);
+
+}
+.search{
+	margin-top:20px;
+	margin-right: 174px;
+	float:right;
+	display: inline-block;
+}
+.inputtxt{
+	width:150px;
+	height:30px;
+	border: 1px solid grey;
+}
+.inputbt{
+	margin-left: -3px;
+	width:30px;
+	height:30px;
+	border:1px solid grey;
+}
+.nav{
+	height:57px;
+	background:url(../img/nav_bg.png);
+}
+.nav .w ul{
+	margin-left:200px;
+}
+.nav .w ul li{
+
+	float:left;
+	height:54px;
+	background:url(../img/nav_bg-line.png) right no-repeat;
+}
+.nav .w ul li a{
+	display:inline-block;
+	height:57px;
+	line-height: 56px;
+	margin: 0 44px;
+}
+.pic{
+	width:980px;
+	height:597px;
+	margin:-3px 0 0 110px;
+	background:url(../img/banner.jpg);
+}
+.sign{
+	border-top:1px solid grey;
+	border-bottom:1px solid grey;
+	height:30px;
+}
+.sign a{
+	margin-left: 107px;
+	line-height:30px;
+	display:inline-block;
+}
+.share{
+	float:right;
+	margin:6px 157px 0 0;
+	padding-right: 10px;
+	display:inline-block;
+	
+}
+
+.share ul li{
+	float:left;
+	width:16px;
+	height:16px;
+	margin-right: 2px;
+}
+.zone{
+	background:url(../img/zone.png);
+}
+.twb{
+	background:url(../img/weibo.png);
+}
+.wb{
+	background:url(../img/xinlang.png);
+}
+.renren{
+	background:url(../img/renren.png);
+}
+
+
+
+.news{
+	margin-top:10px;
+}
+.news .leftnews{
+	display:inline-block;
+	width:310px;
+	height:225px;
+	border:1px solid grey;
+	position: relative;
+	margin-left: 107px;
+}
+
+.picss{
+	margin:10px auto;
+    width: 224px;
+    height: 168px;
+}
+.picss ul li{
+	position: absolute;
+}
+
+.leftpic{
+	position: absolute;
+	top: 50%;
+	left: 10px;
+}
+.rightpic{
+	position: absolute;
+	top: 50%;
+	right: 10px;
+}
+
+
+.titnew{
+	height:30px;
+	padding-left: 10px;
+}
+.titnew a{
+	line-height: 30px;
+}
+.tlogo{
+	display:inline-block;
+	width:14px;
+	height:14px;
+	margin-top:10px;
+	background:url(../img/o.jpg);
+}
+
+
+.news .midnews{
+	display:inline-block;
+	width:375px;
+	height:225px;
+	border:1px solid grey;
+	margin-left: 10px;
+	position: relative;
+}
+
+.midnewss{
+	display: inline-block;
+	position: absolute;
+}
+.midnewss ul li{
+	margin-top: 9px;
+	padding-top: 9px;
+	border-top: 1px dashed gainsboro;
+	margin-left: 20px;
+	width: 320px;
+}
+.midnewss ul .sorry{
+	border:none;
+	color: red;
+}
+
+
+
+.news .rightnews{
+	display:inline-block;
+	width:269px;
+	height:225px;
+	border:1px solid grey;
+	margin-left: 10px;
+	position: relative;
+}
+.newsrlist{
+	position: absolute;
+	
+}
+.newsrlist ul li{
+	margin-left: 27px;
+	margin-top: 8px;
+}
+.newsrlist ul li span{
+	display: inline-block;
+	width: 3px;
+	height: 18px;
+	background: green;
+}
+.newsrlist .p_company{
+	margin-top: 30px;
+}
+.newsrlist p{
+	margin-left: 27px;
+}
+
+.footer{
+    background-color: #2D2D2D;
+    height: 95px;
+    color:#707070;
+    text-align: center;
+    margin-top: 20px;
+}
+.footer .line{
+    height: 20px;
+    border-bottom: 1px dashed #414141;
+    margin-bottom: 20px;
+}

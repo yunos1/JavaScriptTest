@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			body{
+				background: blue;
+				filter: alpha(opacity=20,finishOpacity=80,style=3,startx=100,starty=100,finishx=0,finishy=0);
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			function upDown(num){
+				document.write("<b><font size='+1'>Level1 " + num + "</b><br />");
+				if(num<4){
+					upDown(num+1);
+					document.write("<em>Level "+num+"</em><br />");
+				}
+			}
+			
+			upDown(1);
+		</script>
+	</body>
+</html>

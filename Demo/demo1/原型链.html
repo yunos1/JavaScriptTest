@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//利用构造函数创建一个dog对象
+			function Dog(name,breed,weight){
+				this.name = name;
+				this.breed = breed;
+				this.weight = weight;
+			}
+			
+			//把dog中共有的属性及方法放到其原型链上，避免大量内存消耗
+			Dog.prototype.species = 'Canine';
+			Dog.prototype.bark = function(){
+				if(this.weight < 20){
+					console.log('woof');
+				}else{
+					console.log('WOOF');
+				}
+			};
+			Dog.prototype.run = function(){
+				console.log('i can run');
+			};
+			Dog.prototype.wag = function(){
+				console.log('i can wag');
+			};
+			
+			
+			
+			function ShowDog(name,breed,weight,handler){
+				Dog.call(this,name,breed,weight);
+				this.handler = handler;
+			}
+			//把showdog的原型链设置为dog的实例；
+			ShowDog.prototype = new Dog();
+			
+			ShowDog.prototype.constructor = ShowDog;
+			ShowDog.prototype.league = 'Webville';
+			ShowDog.prototype.stack = function(){
+				console.log('i can stack');
+			};
+			ShowDog.prototype.bait = function(){
+				console.log('i can bait');
+			};
+			ShowDog.prototype.gait = function(){
+				console.log('i can gait');
+			};
+			
+			var fido = new Dog('fido','mixed',39);
+			var scotty = new ShowDog('Scotty','scottish',15,'cookie');
+			
+			fido.bark();
+			scotty.bait();
+			scotty.bark();
+			
+		</script>
+	</body>
+</html>

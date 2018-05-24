@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	
+	<body>
+		<script type="text/javascript">
+			function Robot(name,year,owner){
+				this.name = name;
+				this.year = year;
+				this.owner = owner;
+			}
+			Robot.prototype.maker = 'objectrus';
+			Robot.prototype.speak = function(){
+				console.log('speak');
+			};
+			Robot.prototype.makeCoffee = function(){
+				console.log('coffee');
+			};
+			Robot.prototype.blinklight = function(){
+				console.log('blinklight');
+			};
+			
+			function SpaceRobot(name,year,owner,homePlanet){
+				Robot.call(this,name,year,owner);
+				this.homePlanet = homePlanet;
+			}
+			SpaceRobot.prototype = new Robot();
+			SpaceRobot.prototype.speak = function(){
+				console.log('space speak');
+			};
+			SpaceRobot.prototype.pilot = function(){
+				console.log('pilot');
+			};
+			
+			var robby = new Robot('robby',1964,'lqz');
+			var simon = new SpaceRobot('simon',2088,'lqz','earth');
+			
+			robby.speak();
+			simon.speak();
+			console.log(simon.homePlanet);
+			
+		</script>
+	</body>
+</html>

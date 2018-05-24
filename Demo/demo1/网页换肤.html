@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link id="link1" rel="stylesheet" type="text/css" href="css/white.css"/>
+	</head>
+	<body>
+		<button id="bt1">白天模式</button>
+		<button id="bt2">黑夜模式</button>
+		
+		<script type="text/javascript">
+			window.onload =function(){
+				var bt1 = document.getElementById('bt1');
+				var bt2 = document.getElementById('bt2');
+				var link1 = document.getElementById('link1');
+				bt1.addEventListener('click',function(){
+					link1.href = 'css/white.css';
+				},false);
+				bt2.addEventListener('click',function(){
+					link1.href = 'css/black.css';
+				},false);
+			};
+		</script>
+	</body>
+</html>

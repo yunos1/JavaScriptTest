@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .Actived{
+            color: orange;
+        }
+    </style>
+    <template id="canshu">
+        <div>
+
+            <!-- 使用$route.params可以获取到传进来的参数 -->
+
+            <h3>带参数的Link {{$route.params.id}}</h3>
+        </div>
+    </template>
+</head>
+<body>
+    <div id="app">
+        <router-link to="/home">home</router-link>
+        <router-link to="/news">news</router-link>
+        <router-link :to="'/canshu/'+id">Canshu</router-link>
+        <router-view></router-view>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script>
+        let Home = Vue.component("Home", {
+            template:"<h2>Home</h2>"
+        });
+        let News = Vue.component("News",{
+            template:"<h2>News</h2>"
+        });
+        let Canshu = {
+            template:"#canshu"
+        }
+        var routes = [
+            {path:'/home',component:Home},
+            {path:'/news',component:News},
+            // :id 绑定需要传入的参数
+            {path:'/canshu/:id',component:Canshu},
+            {path:'/*',redirect:'/home'}  //重定向
+        ];
+        // 实例化一个VueRouter对象
+        const router = new VueRouter({
+          routes,
+          linkActiveClass:'Actived'    //链接激活样式 
+        });
+        new Vue({
+            el:"#app",
+            router,
+            data() {
+                return {
+                    id:100
+                }
+            },
+        })
+    </script>
+</body>
+</html>

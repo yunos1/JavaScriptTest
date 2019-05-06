@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        <ul>
+            <li v-for="(v,i) in lists">
+                产品：{{v.name}} 价格：{{v.price}} 数量：{{v.ammount}}
+            </li>
+        </ul>
+        总价格：{{Total}}
+        总价格：{{Total1}}
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data() {
+                return {
+                    lists:[
+                        {name:"手机",price:1200,ammount:2},
+                        {name:"电脑",price:6600,ammount:3},
+                        {name:"平板",price:1700,ammount:4}
+                    ],
+                    total:0
+
+                }
+            },
+            methods: {
+                
+            },
+            computed: {
+                // 计算属性，返回一个值
+                Total(){
+                    var total = 0;
+                    this.lists.forEach(element => {
+                        total += element.price * element.ammount;
+                    });
+                    return total;
+                },
+                Total1(){
+                    return this.lists.reduce((total,v)=>{
+                        return total + v.price * v.ammount;
+                    },0);
+                }
+            },
+        })
+    </script>
+</body>
+</html>

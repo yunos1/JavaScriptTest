@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/animate.css">
+    <title>Document</title>
+    <style>
+        .textCenter{
+            font-size: 40px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button @click="flag = !flag">点击</button>
+        <!-- 方法一：vue封装的方法 结合animate.css样式库-->
+        <transition enter-active-class="animated jello" leave-active-class="animated bounceOut">
+            <div class="textCenter" v-show="flag">动画效果展示</div>            
+        </transition>
+
+        <!--  // 方法二：使用动画钩子函数 -->
+        <transition name="fade"
+            @before-enter="beforeEnter"
+            @enter="enter"
+            @after-enter="afterEnter"
+            @before-leave="beforeLeave"
+            @leave="leave"
+            @after-leave="afterLeave"
+        >
+            <div class="textCenter" v-show="flag">动画效果二</div>
+        </transition>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data() {
+                return {
+                    flag:true
+                }
+            },
+            methods: {
+                // 方法二：使用动画钩子函数
+
+                beforeEnter(el){
+                    console.log("进入之前...")
+                    el.style.background = '#ddd454'
+                },
+                enter(){
+                    console.log("进入中...")
+
+                },
+                afterEnter(el){
+                    console.log("进入之后...")
+                    el.style.background = 'red';
+                },
+                beforeLeave(el){
+                    console.log("离开之前...");
+                    el.innerHTML = '辫子哈哈哈';
+                },
+                leave(){
+                    console.log("离开中...")
+
+                },
+                afterLeave(){
+                    console.log("离开之后...")
+
+                }   
+                
+            },
+        })
+    </script>
+</body>
+</html>

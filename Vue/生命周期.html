@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{message}}
+        <button @click="update">更新</button>
+        <button @click="destroy">销毁</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data(){
+                return{
+                    message:"hello"
+                }
+            },
+            // 创建之前
+            beforeCreate() {
+                console.log("beforeCreate...");
+            },
+            // 创建之后
+            created() {
+                console.log("created...");
+                
+            },
+            // 挂载之前
+            beforeMount() {
+                console.log("beforeMount...")
+            },
+            // 挂载之后
+            mounted() {
+                console.log("mounted...")
+            },
+            // 更新之前
+            beforeUpdate() {
+                console.log("beforeUpdate...")
+            },
+            // 更新之后
+            updated() {
+                console.log("updated...")
+            },
+            // 销毁之前
+            beforeDestroy() {
+                console.log("beforeDestroy...")
+            },
+            // 销毁之后
+            destroyed() {
+                console.log("destroyed...")
+            },
+            methods: {
+                update(){
+                    this.message = "更新信息"
+                },
+                destroy(){
+                    this.$destroy()
+                }
+            },
+
+        })
+    </script>
+</body>
+</html>

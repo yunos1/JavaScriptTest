@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <template id="myA">
+        <div>
+            <h3>这是组件A,Name is {{name}}</h3>
+            <button @click="send">发送到B</button>
+        </div>
+    </template>
+    <template id="myB">
+        <div>
+            <h3>This is componentB, Name from compentA is {{nameA}}</h3>
+        </div>
+    </template>
+</head>
+<body>
+    <div id="app">
+        <my-a></my-a>
+        <my-b></my-b>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        //通过一个空的Vue做Bus中介，实现兄弟组件之间的通信
+        var Bus = new Vue();
+        var A = {
+            template:"#myA",
+            data(){
+                return{
+                    name:'aaaa'
+                }
+            },
+            methods: {
+                send(){
+                    Bus.$emit('send-a', this.name);
+                }
+            }
+        };
+        var B = {
+            template:"#myB",
+            data(){
+                return{
+                    nameA:''
+                }
+            },
+            mounted() {
+                Bus.$on('send-a',name=>{
+                    this.nameA = name;
+                })
+            }
+        };
+       new Vue({
+           el:"#app",
+           components:{
+               'my-a':A,
+               'my-b':B
+           }
+
+       })
+    </script>
+</body>
+</html>

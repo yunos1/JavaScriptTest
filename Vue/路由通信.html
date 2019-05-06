@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <template id="home">
+        <div>
+            <h2>This is home</h2>
+        </div>
+    </template>
+    <template id="user">
+        <div>
+            <h3>用户信息</h3>
+            <ul>
+                <li>
+                    <!-- 传值的两种方法 -->
+                    <!-- 第一种通过/name -->
+                    <router-link :to="'/user/login/'+name+'/'+pwd">登录</router-link>
+                    <!-- 第二种通过?name='' -->
+                    <router-link to="/user/register?name=wangye">注册</router-link>
+                </li>
+            </ul>
+            <router-view></router-view>
+        </div>
+    </template>
+    <template id="login">
+        <div>
+            <h2>Login{{$route.params}}</h2>
+        </div>
+    </template>
+    <template id="register">
+        <div>
+            <h2>register{{$route.query.name}}</h2>
+        </div>
+    </template>
+
+</head>
+
+<body>
+    <div id="app">
+        <router-link to="/home">home</router-link>
+        <router-link to="/user">user</router-link>
+        <router-view></router-view>
+
+        <button @click="goUser">goto用户中心</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script>
+        let Home = {
+            template: '#home'
+        };
+        let User = {
+            template: '#user',
+            data() {
+                return {
+                    name:'liu',
+                    pwd:"xxx"
+                }
+            }
+
+        };
+        let Login = {
+            template: '#login'
+        };
+        let Register = {
+            template: '#register'
+        }
+
+        var routes = [{
+                path: '/home',
+                component: Home
+            },
+            {
+                path: '/user',
+                component: User,
+                children: [{
+                        path: 'login/:name/:pwd',
+                        component: Login
+                    },
+                    {
+                        path: 'register',
+                        component: Register
+                    }
+                ]
+            }
+        ];
+        const router = new VueRouter({
+            routes
+        });
+        new Vue({
+            el: "#app",
+            router,
+            methods: {
+                goUser(){
+                    router.push({path:'/user'}); //路由跳转
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Title</title>
+		<template id="parent">
+			<div>
+				<h2>父组件，姓名是{{pname}},age是{{page}}</h2>
+				<h2>父组件，接受子组件的数据,姓名是{{cname}},age是{{cage}}</h2>
+				<my-child :ppname="pname" :ppage="page" @e-child="showMsg"></my-child>
+			</div>
+		</template>
+		<template id="child">
+			<div>
+				<h2>子组件，姓名是{{cname}},age是{{cage}}</h2>
+				<h2>子组件，接受父组件的数据,姓名是{{ppname}},age是{{ppage}}</h2>
+				<button type="button" @click="sendMsg">发送信息</button>
+			</div>
+		</template>
+	</head>
+	<body>
+		<div id="app">
+			<my-parent>
+				
+			</my-parent>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script type="text/javascript">
+			new Vue({
+				el:"#app",
+				components:{
+					'my-parent':{
+						template:"#parent",
+						data(){
+							return{
+								pname:"parent",
+								page:40,
+								cname:'',
+								cage:''
+							}
+						},
+						methods:{
+							showMsg(name,age){
+								this.cname = name;
+								this.cage =age;
+							}
+						},
+						components:{
+							'my-child':{
+								template:"#child",
+								props:["ppname","ppage"],
+								data(){
+									return{
+										cname:'child',
+										cage:18
+									}
+								},
+								methods:{
+									sendMsg(){
+										this.$emit('e-child',this.cname,this.cage);
+									}
+								}
+								
+							}
+						}
+					}
+					
+				}
+			});
+			
+		</script>
+		
+	</body>
+	
+</html>

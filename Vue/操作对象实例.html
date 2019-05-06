@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{address.pro}}
+        {{address.city}}
+        <button @click="add">添加</button>
+        <button @click="update">更新</button>
+        <button @click="del">删除</button>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data(){
+               return{
+                name:'init',
+                address:{
+                    name:"huaian",
+                    pro:"江苏省"
+                }
+               }
+            },
+            methods: {
+                add(){
+                    this.$set(this.address, "city", "徐州")
+                },
+                update(){
+                    this.address.city = "邳州"
+                },
+                del(){
+                    this.$delete(this.address, "city")
+                }
+
+            },
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <li v-for="(v,i) in nums">{{v | addZero(v)}}</li>
+
+        <li>{{ 5 | Zero }}</li>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+
+        // 全局指令
+        Vue.filter("addZero", (num)=>{
+            return num < 10 ? '0'+num : num;
+        })
+
+        new Vue({
+            el:"#app",
+            data() {
+                return {
+                    nums:[23,3,45,23,6,4,10],
+                    nums2:[11,4,565,7,8,34]
+                }
+            },
+            // 局部指令
+            filters:{
+                Zero(n){
+                    return n < 10 ? '0' + n : n;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

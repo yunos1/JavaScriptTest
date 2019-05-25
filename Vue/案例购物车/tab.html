@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul,li{
+            list-style: none;
+        }
+        ul{
+            display: flex;
+            
+        }
+        li{
+            border: 1px solid black;
+            padding: 20px 50px;
+            cursor: pointer;
+        }
+        .con div{
+            width: 100px;
+            height: 100px;
+            background: pink;
+            text-align: center;
+            
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li @click="getcur(0)">新闻</li>
+            <li @click="getcur(1)">视频</li>
+            <li @click="getcur(2)">资讯</li>
+        </ul>
+        <div class="con">
+            <div v-show="cur == 0">新闻内容</div>
+            <div v-show="cur == 1">视频内容</div>
+            <div v-show="cur == 2">资讯内容</div>            
+        </div>
+
+
+        <ul>
+            <li v-for="(v,i) in titles" @click="cur = i">{{v}}</li>
+        </ul>
+        <div class="con">
+            <div v-for="(v,i) in content" v-show="cur == i">{{v}}</div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data() {
+                return {
+                    titles:['标题一','标题二','标题三'],
+                    content:['内容一','内容二','内容三'],
+                    cur:0
+                }
+            },
+            methods: {
+                getcur(i){
+                    this.cur = i;
+                    console.log(i);
+                }
+            },
+            created() {
+                console.log(this.cur)
+            },
+        })
+    </script>
+</body>
+</html>

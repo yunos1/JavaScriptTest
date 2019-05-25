@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        .one{
+            border: 1px solid red;
+            width: 400px;
+            height: 300px;
+            
+        }
+        .two{
+            border: 2px solid green;
+            width: 300px;
+            height: 200px;
+        }
+        .three{
+            border: 3px solid yellow;
+            width: 200px;
+            height: 100px;
+        }
+    </style>
+
+</head>
+<body>
+        <div id="app">
+
+            <div class="one" @click="Log(1)">1
+                <div class="two" @click="Log(2)">2
+                    <!-- 使用stop修饰符来阻止冒泡事件 -->
+                    <div class="three" @click.stop="Log(3)">3
+                            
+                            <!-- 使用prevent修饰符来阻止默认行为 -->
+                            <a href="www.baidu.com" @click.prevent="showMess()">阻止默认行为</a>
+
+                            <!-- 使用once修饰符使其只执行一次 -->
+                            <button @click.once="showMess">只执行一次</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script>
+            new Vue({
+                el:"#app",
+                data() {
+                    return {
+                        
+                    }
+                },
+                methods: {
+                    Log(i){
+                        console.log(i);
+                    },
+                    showMess(){
+                        console.log("阻止默认行为。")
+                    }
+                },
+            })
+        </script>
+</body>
+</html>

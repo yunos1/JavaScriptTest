@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        //组合继承
+        //父类构造函数
+        function Person(name,age){
+            this.name= name;
+            this.age = age;
+        }
+        //添加共有方法
+        Person.prototype.sayName = function(){
+            console.log(this.name);
+        }
+        //子类构造函数
+        function Student(name,age,color){
+            //继承父类构造函数
+            Person.apply(this,arguments);
+            this.color = color;
+        }
+        //类式继承
+        Student.prototype = new Person();
+        var p1 = new Person('ss',11);
+        var s1 = new Student('lq',23,'red');
+        p1.sayName();
+        s1.sayName();
+        console.log(s1.color);
+        console.log(p1.color)
+
+
+        //extend继承
+
+        class Animal{
+            constructor(color){
+                this.color = color;
+            }
+            greet(sound){
+                console.log(sound)
+            }
+        }
+        class Dog extends Animal{
+            constructor(color){
+                super(color);
+                //this.color = color;
+            }
+        }
+
+        var dog = new Dog('白色');
+        dog.greet('汪汪');
+        console.log(dog.color)
+
+
+        //声明父类
+    // function Animal(name,color){
+    //     this.name = name;
+    //     this.color = color;
+    // }
+    // Animal.prototype.greet = function(sound){
+    //     console.log(sound)
+    // }   
+    // //声明子类
+    // function Dog(name,color){
+    //     Animal.apply(this,arguments)
+    // } 
+    // //类式继承
+    // Dog.prototype = new Animal();
+    
+    // var dog = new Dog('ss','red');
+    // console.log(dog.color);
+    // dog.greet('旺旺');
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var array = [1,1,'1','1'];
+        //基础使用双层循环
+        function unique1(arr){
+            var newArr = []
+            for(var i = 0;i<array.length;i++){
+                for(var j = 0;j<newArr.length;j++){
+                    if(arr[i] === newArr[j]){
+                        break;
+                    }
+                }
+                if(j == newArr.length){
+                    newArr.push(array[i])
+                }
+            }
+            return newArr
+        }
+        //使用indexOf
+        function unique2(arr){
+            var newArr = []
+            for(var i=0;i<arr.length;i++){
+                if(newArr.indexOf(arr[i]) === -1){
+                    newArr.push(arr[i])
+                }
+            }
+            return newArr;
+        }
+        //使用filter
+        function unique3(arr){
+            //var newArr = []
+            var newArr = arr.filter((item,index,arr)=>{
+                return arr.indexOf(item) == index;
+            })
+            return newArr
+        }
+        //使用set
+        function unique4(arr){
+            return Array.from(new Set(arr))
+        }
+        //或者使用扩展运算符
+        function unique5(arr){
+            return [...new Set(arr)]
+        }
+        //使用Map
+        function unique6(arr){
+            var map = new Map();
+            return arr.filter(item=>{
+                return !map.has(item) && map.set(item,1)
+            })
+        }
+
+        console.log(unique1(array));
+        console.log(unique2(array));
+        console.log(unique3(array));
+        console.log(unique4(array));
+        console.log(unique5(array));
+        console.log(unique6(array));
+
+    </script>
+</body>
+</html>

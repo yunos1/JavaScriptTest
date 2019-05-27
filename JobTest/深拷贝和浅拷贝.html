@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var shallowCopy = function(obj){
+            if(typeof obj !== 'object') return;
+            var newObj = obj instanceof Array ? [] : {}
+            for(var key in obj){
+                //hasOwnProperty() 判断对象（不包含其原型链）本身是否具有指定名称的属性
+                if(obj.hasOwnProperty(key)){
+                    newObj[key] = obj[key];
+                }
+            }
+            return newObj;
+        }
+
+        var obj = {
+            name:'lqz',
+            age:24
+        }
+        var obj2= shallowCopy(obj)
+        console.log(obj2)
+        console.log(obj == obj2);
+
+
+        var deepCopy = function(obj){
+            if(typeof obj !== 'object') return;
+            var newObj = obj instanceof Array ? [] : {}
+            for(var key in obj){
+                if(obj.hasOwnProperty(key)){
+                    newObj[key] = typeof obj[key] === 'object' ? deepCopy(obj[key]) : obj[key]
+                }
+            }
+            return newObj;
+        }
+
+
+        // function addNew(Con,...agrs){
+        //     var obj = {};
+        //     obj.__proto__ = Con.prototype;
+        //     let result = Con.apply(obj,agrs)
+        //     return result instanceof Object ? result : obj;
+        // }
+
+
+
+
+
+
+        
+    </script>
+</body>
+</html>

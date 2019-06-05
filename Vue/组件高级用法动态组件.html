@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul,li{
+            list-style: none;
+        }
+    </style>
+    <template id="mytab">
+        <div>
+            <ul>
+                <li v-for="(v,i) in title" @click="flag = i">{{v}}</li>
+            </ul>
+            <div class="con">
+                <div v-for="(v,i) in content" v-show="flag === i">{{v}}</div>
+            </div>
+        </div>
+    </template>
+    <template id="mycontent">
+        <div>
+            <p>mycontent</p>
+        </div>
+    </template>
+</head>
+<body>
+    <div id="app">
+        <button @click="flag1 = 'mytab'">mytab</button>
+        <button @click="flag1 = 'mycontent'">mycontent</button>
+        <component :is="flag1"></component>
+    </div>
+    <script src="./js/vue.min.js"></script>
+    <script>
+        var app = new Vue({
+            el:'#app',
+            data() {
+                return {
+                    flag1:'mytab'
+                }
+            },
+            components:{
+                'mytab':{
+                    template:'#mytab',
+                    data(){
+                        return {
+                            title:['标题一','标题二','标题三'],
+                            content:['内容一','内容二','内容三'],
+                            flag:0
+                        }
+                    }
+                },
+                'mycontent':{
+                    template:'#mycontent'
+                }
+            }
+        })
+    </script>
+</body>
+</html>

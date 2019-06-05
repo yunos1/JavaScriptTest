@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul,li{
+            list-style: none;
+        }
+        li{
+            float: left;
+            margin: 10px 30px;
+        }
+        .activeClass{         
+            color: red;
+            border-bottom: 1px solid red;
+            padding-bottom: 10px;
+        }
+        .con{
+            clear: both;
+            width: 300px;
+            height: 300px;
+            margin-left: 50px;
+            border: 1px solid gray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+    <template id="mytab">
+        <div>
+            <ul>
+                <li v-for="(v,i) in titleTab" @click="tag=i" :class="{activeClass:tag==i}">{{v}}</li>
+            </ul>
+            <div class="con">
+                <div v-for="(v,i) in contTab" v-show="tag === i">{{v}}</div>
+            </div>
+        </div>
+    </template>
+
+</head>
+<body>
+    <div id="app">
+        <mytab></mytab>   
+    </div>
+    <script src="./js/vue.min.js"></script>
+    <script>
+        var app = new Vue({
+            el:'#app',
+            data() {
+                return {
+                    
+                }
+            },
+            components:{
+                'mytab':{
+                    template:"#mytab",
+                    data(){
+                        return{
+                            titleTab:['标题一','标题二','标题三'],
+                            contTab:['内容一','内容二','内容三'],
+                            tag:0
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

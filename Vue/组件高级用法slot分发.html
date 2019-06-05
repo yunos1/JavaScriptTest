@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <template id="myslot">
+        <div>
+            <p>my slot</p>
+            <slot name="s1"></slot>
+            <p>------</p>
+            <slot name="s2"></slot>
+        </div>
+    </template>
+</head>
+<body>
+    <div id="app">
+        <myslot>
+            <ul slot="s1">
+                <li>111</li>
+                <li>222</li>
+            </ul>
+            <ul slot="s2">
+                    <li>aaa</li>
+                    <li>bbb</li>
+                </ul>
+        </myslot>
+    </div>
+    <script src="./js/vue.min.js"></script>
+    <script>
+        var app = new Vue({
+            el:'#app',
+            data() {
+                return {
+                    
+                }
+            },
+            components:{
+                'myslot':{
+                    template:'#myslot'
+                }
+            }
+        })
+    </script>
+</body>
+</html>

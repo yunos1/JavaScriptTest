@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <template id="myTr">
+        <tr>
+            <td>aaa</td>
+            <td>bbb</td>
+        </tr>
+    </template>
+</head>
+<body>
+    <div id="app">
+        <table border="1">
+            <!-- <mytr></mytr> -->
+            <!-- 错误的写法，导致vue不会识别两者的关系 -->
+
+            <!-- is指令表示的是一个组件，需要用组件来解析 -->
+            <tr is="mytr"></tr>
+        </table>
+    </div>
+    <script src="./js/vue.min.js"></script>
+    <script>
+        var app =new Vue({
+            el:'#app',
+            data() {
+                return {
+                    
+                }
+            },
+            components:{
+                'mytr':{
+                    template:'#myTr'
+                }
+            }
+        })
+    </script>
+</body>
+</html>

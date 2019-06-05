@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <template id="myA">
+        <div>
+            <p>this is A {{name}}</p>
+            <button @click="sendMsg">发送到B</button>
+        </div>
+    </template>
+    <template id="myB">
+        <div>
+            <p>this is B {{bname}}</p>
+        </div>
+    </template>
+</head>
+<body>
+    <div id="app">
+        <compon-a></compon-a>
+        <compon-b></compon-b>
+
+    </div>
+    <script src="./js/vue.min.js"></script>
+    <script>
+
+        var Bus = new Vue();
+        var A = {
+            template:'#myA',
+            data(){
+                return{
+                    name:'NameA'
+                }
+            },
+            methods: {
+                sendMsg(){
+                    Bus.$emit('send',this.name);
+                }
+            },
+        }
+        var B = {
+            template:'#myB',
+            data(){
+                return{
+                    bname:''
+                }
+            },
+            mounted() {
+                Bus.$on('send',name=>{
+                    this.bname = name;
+                })
+            },
+        }
+
+        new Vue({
+            el:'#app',
+            components:{
+                'componA':A,
+                'componB':B
+            }
+        })
+    </script>
+</body>
+</html>

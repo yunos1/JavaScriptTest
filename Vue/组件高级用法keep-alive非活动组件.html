@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- keep-alive 可以缓存非活动组件 -->
+
+    <div id="app">
+        <button @click="flag='my-change1'">my-change1</button>
+        <button @click="flag='my-change2'">my-change2</button>
+        <component :is="flag"></component>
+
+        <!-- 如果想保留缓存，添加keep-alive标签,用于性能优化 -->
+        <keep-alive>
+            <component :is="flag"></component>
+        </keep-alive>
+    </div>
+    <script src="./js/vue.min.js"></script>
+    <script>
+        var app = new Vue({
+            el:'#app',
+            data() {
+                return {
+                    flag:'my-change1'
+                }
+            },
+            components:{
+                'my-change1':{
+                    template:"<h1>{{math1}}</h1>",
+                    data(){
+                        return{
+                            math1:Math.random()
+                        }
+                    }
+                },
+                'my-change2':{
+                    template:"<h3>{{math2}}</h3>",
+                    data(){
+                        return{
+                            math2:Math.random()
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

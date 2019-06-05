@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <template id="myfather">
+        <div>
+            <p>父组件：this is father msg name:{{fname}} age:{{fage}}</p>
+            <p>父组件：this is son msg name:{{sname}} age:{{sage}}</p>
+            <son-con :fname="fname" :fage="fage" @myson="showMsg"></son-con>
+        </div>
+    </template>
+    <template id="myson">
+        <div>
+            <p>子组件：this is father msg name:{{fname}} age:{{fage}}</p>
+            <p>子组件：this is son msg name:{{sname}} age:{{sage}}</p>
+            <button @click="sendMsg">发送信息</button>
+        </div>
+    </template>
+</head>
+<body>
+    <div id="app">
+        <father-con></father-con>
+    </div>
+    <script src="./js/vue.min.js"></script>
+    <script>
+        var app = new Vue({
+            el:'#app',
+            components:{
+                'fatherCon':{
+                    template:"#myfather",
+                    data(){
+                        return {
+                            fname:'father',
+                            fage:30,
+                            sname:'',
+                            sage:''
+                        }
+                    },
+                    methods:{
+                        showMsg(name,age){
+                            this.sname = name;
+                            this.sage = age;
+                        }
+                    },
+                    components:{
+                        'sonCon':{
+                            template:"#myson",
+                            props:['fname','fage'],
+                            data(){
+                                return{
+                                    sname:'son',
+                                    sage:10
+                                }
+                            },
+                            methods: {
+                                sendMsg(){
+                                    this.$emit('myson',this.sname,this.sage)
+                                }
+                            },
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

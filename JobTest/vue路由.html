@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .active{
+            color: black;
+        }
+    </style>
+    <template id="coma">
+        <div>
+            <h1>ComA</h1>
+        </div>
+    </template>
+    <template id="comb">
+        <div>
+            <h1>ComB,{{$route.params}}</h1>
+        </div>
+    </template>
+</head>
+<body>
+    <div id="app">
+        <!-- 使用router-link组件来导航 -->
+        <!-- 通过to 属性指定链接 -->
+
+        <router-link to="/coma">ComA</router-link>
+        <!-- 路由传值 -->
+        <router-link :to="'/comb/'+ id">comB</router-link>
+
+        <!-- 路由匹配的组件将在这里渲染 -->
+        <router-view></router-view>
+
+    </div>
+    <script src="./vue.js"></script>
+    <script src="./vueRouter.js"></script>
+    <script>
+
+        var comA = {
+            template:"#coma"
+        }
+        var comB = {
+            template:"#comb"
+        }
+
+        const routes = [
+            {path:"/coma",component:comA},
+            {path:'/comb/:id',component:comB},
+            {path:"/*",redirect:"/coma"}
+        ];
+        const router = new VueRouter({
+            routes,
+            // 改变当前激活的样式
+            linkActiveClass:"active"
+        })
+
+        new Vue({
+            el:"#app",
+            data() {
+                return {
+                    id:100
+                }
+            },
+            components:{
+                mycomA:comA,
+                mycomB:comB
+            },
+            router
+        })
+    </script>
+</body>
+</html>

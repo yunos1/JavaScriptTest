@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    
+        .clss{
+            display:flex;
+        }
+    </style>
+</head>
+<body>
+    
+    <script>
+        var obj = {
+            hi:function(){
+                console.log(this);  //this指向obj
+                return ()=>{
+                    console.log(this);  //this指向obj
+                }
+            },
+            sayHi:function(){
+                return function(){
+                    console.log(this);    
+                    return ()=>{
+                        console.log(this)
+                    }
+                }
+            },
+            see:function(){
+                console.log(this);  //this指向obj
+                (function(){
+                    console.log(this)  //this指向window
+                })()
+            },
+            say:()=>{
+                console.log(this)  //this指向window
+
+            }
+        }
+
+        let hi = obj.hi();
+        hi();
+        console.log("--------------");
+        let sayhi = obj.sayHi();
+        let fun1 = sayhi();
+        fun1();
+        console.log("--------------");
+        obj.see();
+        console.log("--------------");
+        obj.say();
+    </script>
+</body>
+</html>

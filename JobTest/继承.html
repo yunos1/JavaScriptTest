@@ -37,44 +37,44 @@
 
         //extend继承
 
-        class Animal{
-            constructor(color){
-                this.color = color;
-            }
-            greet(sound){
-                console.log(sound)
-            }
-        }
-        class Dog extends Animal{
-            constructor(color){
-                super(color);
-                //this.color = color;
-            }
-        }
+        // class Animal{
+        //     constructor(color){
+        //         this.color = color;
+        //     }
+        //     greet(sound){
+        //         console.log(sound)
+        //     }
+        // }
+        // class Dog extends Animal{
+        //     constructor(color){
+        //         super(color);
+        //         //this.color = color;
+        //     }
+        // }
 
-        var dog = new Dog('白色');
-        dog.greet('汪汪');
-        console.log(dog.color)
+        // var dog = new Dog('白色');
+        // dog.greet('汪汪');
+        // console.log(dog.color)
 
 
         //声明父类
-    // function Animal(name,color){
-    //     this.name = name;
-    //     this.color = color;
-    // }
-    // Animal.prototype.greet = function(sound){
-    //     console.log(sound)
-    // }   
-    // //声明子类
-    // function Dog(name,color){
-    //     Animal.apply(this,arguments)
-    // } 
-    // //类式继承
-    // Dog.prototype = new Animal();
+    function Animal(name,color){
+        this.name = name;
+        this.color = color;
+    }
+    Animal.prototype.greet = function(sound){
+        console.log(sound)
+    }   
+    //声明子类
+    function Dog(name,color){
+        Animal.apply(this,arguments)
+    } 
+    //类式继承
+    Dog.prototype = new Animal();
     
-    // var dog = new Dog('ss','red');
-    // console.log(dog.color);
-    // dog.greet('旺旺');
+    var dog = new Dog('ss','red');
+    console.log(dog.color);
+    dog.greet('旺旺');
 
 
     </script>

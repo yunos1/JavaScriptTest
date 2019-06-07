@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <template id="user">
+        <div>
+            <h1>User</h1>
+            <router-link :to="{name:'login'}">登录</router-link>
+            <router-view></router-view>
+        </div>
+    </template>
+    <template id="login">
+        <div>
+            <form action="">
+                <label for="username">用户名：</label>
+                <input name="username" v-model="name" type="text" placeholder="请输入用户名"></br>
+                <label for="username">密码：</label>
+                <input name="username" v-model="age" type="text" placeholder="请输入密码"></br>
+                <button type="button" @click="submitUser">提交</button>
+            </form>
+        </div>
+    </template>
+    <template id="register">
+        <div>
+            <h3>注册</h3>
+        </div>
+    </template>
+</head>
+<body>
+    <div id="app">
+        <router-link :to="{name:'user',params:{name:'lqz'}}">User</router-link>
+        <router-link :to="'/home/'+name+'/'+age">Home</router-link>
+        <router-view></router-view>
+    </div>
+    <script src="./vue.js"></script>
+    <script src="./vueRouter.js"></script>
+    <script type="text/x-template" id="home">
+        <div>
+            <h3>This is Home Page</h3>
+            <ul>
+                <li>Name:{{$route.params.name}}</li>
+                <li>Age:{{$route.params.age}}</li>
+            </ul>
+        </div>
+    </script>
+    <script>
+        let User = {
+            template:"#user",
+            data(){
+                return{
+                    uname:'qqq',
+                    upwd:'222'
+                }
+            }
+        };
+        let Login = {
+            template:"#login",
+            data() {
+                return {
+                    name:'',
+                    age:''
+                }
+            },
+            methods: {
+                // 提交事件
+                submitUser(e){
+                    const self= this;
+                    self.$router.push({name:'home',params:{name:self.name,age:self.age}})
+                }
+            },
+        };
+        let Register = {
+            template:"#register",
+            data(){
+                return{
+
+                }
+            }
+        }
+        let Home = {
+            template:"#home",
+            data(){
+                return{
+                   
+                }
+            }
+        }
+        const routes = [
+            {
+                path:"/user",
+                name:"user",
+                component:User,
+                children:[
+                    {path:"login",name:"login",component:Login},
+                    {path:"register",component:Register}
+                ]
+            },
+            {
+                path:"/home/:name/:age",
+                name:"home",
+                component:Home
+            }
+        ];
+        // 等同于
+        // this.$router.push({name:"user",params:{name:'lqz'}})
+        const router = new VueRouter({
+            routes
+            /*
+                {
+                    path:"/user/:name",
+                    name:"user",
+                    component:User
+                }
+            */
+        })
+
+        new Vue({
+            el:"#app",
+            router,
+            data(){
+                return{
+                    name:'home',
+                    age:18
+                }
+            }
+        })
+    </script>
+</body>
+</html>

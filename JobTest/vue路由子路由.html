@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .active{
+            color: black;
+        }
+    </style>
+    <template id="coma">
+        <div>
+            <h1>ComA</h1>
+            
+            <button @click="gotoComb2">A组件跳转Comb</button>
+        </div>
+    </template>
+    <template id="comb">
+        <div>
+            <h1>ComB</h1>
+            <h2>从A组件传过来的数据{{$route.query}}</h2>
+            <router-link :to="'/comb/login/' + uname + '/' + uage">登录</router-link>
+            <router-link to="/comb/register?uname=dd&uage=90">注册</router-link>
+            <router-view></router-view>
+        </div>
+    </template>
+</head>
+<body>
+    <div id="app">
+        <!-- 使用router-link组件来导航 -->
+        <!-- 通过to 属性指定链接 -->
+
+        <router-link to="/coma">ComA</router-link>
+        <!-- 路由传值 -->
+        <router-link to="/comb">ComB</router-link>
+        
+
+        <!-- 路由匹配的组件将在这里渲染 -->
+        <router-view></router-view>
+        
+        <button @click="gotoComb">主组件跳转Comb</button>
+
+    </div>
+    <script src="./vue.js"></script>
+    <script src="./vueRouter.js"></script>
+    <script>
+        // 组件A
+        var comA = {
+            template:"#coma",
+            methods: {
+                
+                gotoComb2(){
+                    router.push({
+                        path:"/comb",
+                        query:{
+                            pwd:"123"
+                        }
+                    })
+                }
+            },
+        }
+        // 组件B
+        var comB = {
+            template:"#comb",
+            data() {
+                return {
+                    uname:'lqz',
+                    uage:23
+                }
+            },
+        }
+        // 组件login
+        var login = {
+            template:"<h3>login,Name:{{$route.params.uname}},Age:{{$route.params.uage}}</h3>"
+        }
+        // 组件register
+        var register = {
+            template:"<h3>Register,Name:{{$route.query}}</h3>"
+        }
+        // 路由
+        const routes = [
+            {path:"/coma",component:comA},
+            {
+                path:'/comb',
+                component:comB,
+                children:[
+                    {
+                        path:"login/:uname/:uage",
+                        component:login
+                    },
+                    {
+                        path:"register",
+                        component:register
+                    }
+                ]
+            },
+        ];
+        const router = new VueRouter({
+            routes,
+            // 改变当前激活的样式
+            linkActiveClass:"active"
+        })
+
+        new Vue({
+            el:"#app",
+            data() {
+                return {
+                    id:100
+                }
+            },
+            components:{
+                mycomA:comA,
+                mycomB:comB
+            },
+            router,
+            methods: {
+                gotoComb(){
+                    router.push({
+                        path:"/comb"
+                    })
+                }
+            },
+        })
+    </script>
+</body>
+</html>

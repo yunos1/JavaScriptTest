@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <template id="user">
+        <div>
+            <p>从news接受的信息.{{$route.query}}</p>
+            <router-link :to="'/user/login/' + name +'/' + age">登录</router-link>
+            <router-link to="/user/register?pwd=666&info=lll">注册</router-link>
+
+            <router-view></router-view>
+        </div>
+    </template>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to="/home">Home</router-link>
+        <router-link to="/news">News</router-link>
+        <router-link to="/user">User</router-link>
+
+        <router-view></router-view>
+    </div>
+    <script src="./vue.js"></script>
+    <script src="./vueRouter.js"></script>
+    <script type="text/x-template" id="news">
+        <div>
+            <ul>
+                 <li v-for="(item,index) in list">Name:{{item.name}}.Age:{{item.age}}</li>
+            </ul>
+            <!-- 点击跳转事件 -->
+            <button @click='gotoUser'>go to User</button>
+            <!-- 返回上一级 -->
+            <button @click="backto">back</button>
+        </div>
+    </script>
+    <script>
+        let Home = {
+            template: "<h1>This is Home Page </h1>"
+        }
+        let News = {
+            template: "#news",
+            data() {
+                return {
+                    list: [{
+                            name: '11',
+                            age: 12
+                        },
+                        {
+                            name: '13',
+                            age: 22
+                        },
+                        {
+                            name: '15',
+                            age: 23
+                        }
+                    ]
+                }
+            },
+            methods: {
+                // 路由跳转(从news组件跳转到User组件)
+                gotoUser() {
+                    this.$router.push({
+                        path: "/user",
+                        query: {home:"home"}
+                    })
+                },
+                backto(){
+                    // 返回上一级
+                    this.$router.go(-1)
+                }
+
+            }
+        }
+        let User = {
+            template: "#user",
+            data() {
+                return {
+                    name: "hehe",
+                    age: 16
+                }
+            },
+        }
+        let Login = {
+            template: "<h3>Login {{$route.params}}</h3>"
+        }
+        let Register = {
+            template: "<h3>Register {{$route.query}}</h3>"
+        }
+        let routes = [{
+                path: "/home",
+                component: Home
+            },
+            {
+                path: "/news",
+                component: News
+            },
+            {
+                path: "/user",
+                component: User,
+                children: [{
+                        path: "login/:name/:age",
+                        component: Login
+                    },
+                    {
+                        path: "register",
+                        component: Register
+                    }
+                ]
+            }
+        ];
+        const router = new VueRouter({
+            routes
+        })
+
+        new Vue({
+            el: "#app",
+            data() {
+                return {
+
+                }
+            },
+            router,
+            methods: {
+
+            },
+        })
+    </script>
+</body>
+
+</html>

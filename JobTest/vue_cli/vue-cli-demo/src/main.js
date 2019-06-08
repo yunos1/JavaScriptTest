@@ -3,8 +3,11 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import Login from '@/components/common/login'
 
 Vue.config.productionTip = false
+
+Vue.use(Login)
 
 /* eslint-disable no-new */
 new Vue({

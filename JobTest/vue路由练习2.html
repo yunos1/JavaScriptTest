@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <template id="login">
+            <div>
+                This is login {{$route.params.name}}
+            </div>
+        </template>
+</head>
+<body>
+        <div id="app">
+                
+               <router-link :to="'/login/'+name">Login</router-link>
+               
+               <router-link to="/register?name=zhangsan">Register</router-link>
+               
+               <router-view></router-view>
+           </div>
+    <script src="./vue.js"></script>
+    <script src="./vueRouter.js"></script>
+    <script type="text/x-template" id="register">
+        <div>
+            This is Register {{$route.query.name}}
+        </div>
+    </script>
+    <script>
+        //Login组件
+  let Login = {
+      template:"#login",
+      data(){
+          return{
+             
+          }
+      }
+  };
+  //注册组价
+  let Register = {
+      template:"#register",
+      data(){
+          return{
+              name:"ll"
+          }
+      }
+  };
+  //路由配置
+  const routes = [
+      {path:"/login/:name",component:Login},
+      {path:"/register",component:Register}
+  ];
+  //new 路由
+  const router = new VueRouter({
+      routes
+  });
+  new Vue({
+      el:"#app",
+      data(){
+          return{
+            name:"lqz"
+          }
+      },
+      router
+  })
+    </script>
+</body>
+</html>

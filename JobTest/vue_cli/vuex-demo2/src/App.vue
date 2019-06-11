@@ -1,41 +1,38 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-
+    <img alt="Vue logo" src="./assets/logo.png">
+    <HelloWorld msg="Welcome to Your Vue.js App"/>
 
     <!-- 状态管理器 -->
     <button @click="increment">增加</button>
     <button @click="decrement">减少</button>
-    <button @click="incrementAsync">异步增加</button>
-    <button @click="incrementAsync2">异步增加2</button>
+    <button @click="incrementAsync">异步增加2</button>
     <p>当前count值为：{{count}}</p>
     <p>当前count值为：{{isEven}}</p>
 
-    <router-view/>
   </div>
 </template>
 
 <script>
+import HelloWorld from './components/HelloWorld.vue'
 import {mapGetters,mapActions} from 'vuex'
 
 export default {
-  data(){
-    return{
-
-    }
+  name: 'app',
+  components: {
+    HelloWorld
   },
   methods: {
-    ...mapActions(['increment','decrement','incrementAsync']),
-    incrementAsync2(){
-       this.$store.dispatch('incrementAsync');
+    ...mapActions(['increment','decrement']),
+    incrementAsync(){
+      this.$store.dispatch("incrementAsync")
     }
   },
   computed: {
     ...mapGetters(['count','isEven'])
-  },  
+  },
 }
 </script>
-
 
 <style>
 #app {

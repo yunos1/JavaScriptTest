@@ -1,42 +1,45 @@
-
-//状态管理器
-
 import Vue from 'vue'
 import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-// 定义状态属性
-var state = {
+const state = {
     count:0
 }
 
-// 定义getters  ---读取
-var getters = {
+const getters = {
     count(state){
-        return state.count;
+        return state.count
+    },
+    isEven(state){
+        return state.count % 2 == 0 ? '偶数':'奇数';
     }
 }
 
-// 定义actions行为
-var actions = {
-    // 状态  添加
-    increatement({commit,state}){
-        // TODO
-        commit("increatement")
+const actions = {
+    increment({commit}){
+        commit("increment")
     },
-    decreatement({commit,state}){
-        commit("decreatement")
+    decrement({commit}){
+        commit("decrement")
+    },
+    incrementAsync({commit}){
+        let p = new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+                resolve()
+            },1000)
+        })
+        p.then(()=>{
+            commit("increment")
+        }).catch(err=>console.log(err))
     }
 }
-
-// 定义mutation
-var mutations = {
-    increatement(state){
-        state.count++;
+const mutations = {
+    increment(state){
+        state.count++
     },
-    decreatement(state){
-        state.count--;
+    decrement(state){
+        state.count--
     }
 }
 

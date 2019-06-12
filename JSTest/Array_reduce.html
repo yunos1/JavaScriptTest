@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			let arr = [1,2,3];
+			let sum1 = arr.reduce((total,next)=>total+next);
+			let sum2 = arr.reduce((total,next)=>total+next,1);
+			
+			let sum3 = arr.reduceRight((total,currentValue)=>total+currentValue);
+			
+			console.log(sum1,sum2,arr);
+			
+			console.log(sum3)
+			
+		</script>
+	</body>
+</html>
